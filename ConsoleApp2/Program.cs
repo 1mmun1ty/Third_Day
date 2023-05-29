@@ -81,6 +81,34 @@
                 }
             }
         }
+        void DepartamentSalaryMin()
+        {
+            Console.WriteLine("Введите номер отдела");
+            double department = double.Parse(Console.ReadLine());
+            var employeesInDepartment = employees.Where(e => e.Department == department);
+            if (employeesInDepartment.Any())
+            {
+                var employeeWithMinSalary = employeesInDepartment.OrderBy(e => e.Salary).First();
+                Console.WriteLine($"Человек с самой минимальной зарплатой в отделе {department}: {employeeWithMinSalary.Fio} - {employeeWithMinSalary.Salary} рублей");
+            }
+            else
+            {
+                Console.WriteLine($"Отдел {department} не найден или не имеет сотрудников.");
+            }
+        }
+        void DepartamentSalaryMax()
+        {
+            Console.WriteLine("Введите номер отдела"); double department = double.Parse(Console.ReadLine());
+            var employeesInDepartment = employees.Where(e => e.Department == department); if (employeesInDepartment.Any())
+            {
+                var employeeWithMaxSalary = employeesInDepartment.OrderBy(e => e.Salary).Last();
+                Console.WriteLine($"Человек с самой максимальной зарплатой в отделе {department}: {employeeWithMaxSalary.Fio} - {employeeWithMaxSalary.Salary} рублей");
+            }
+            else
+            {
+                Console.WriteLine($"Отдел {department} не найден или не имеет сотрудников.");
+            }
+        }
         void test9()
             {
                 Console.WriteLine("Введите число:");
@@ -98,12 +126,12 @@
 
             while (true)
             {
-                Console.WriteLine("Напишите 10, чтобы узнать информацию о всех заданиях");
+                Console.WriteLine("Напишите 20, чтобы узнать информацию о всех заданиях");
 
                 int number_mission = Convert.ToInt32(Console.ReadLine());
                 switch (number_mission)
                 {
-                    case 10:
+                    case 20:
                         Console.WriteLine("1-е задание: Все данные сотрудников");
                         Console.WriteLine("2-е задание: Сумма затрат на зп в месяц");
                         Console.WriteLine("3-е задание: Сотрудник с минимальной зарплатой");
@@ -112,9 +140,10 @@
                         Console.WriteLine("6-е задание: ФИО всех сотрудников");
                         Console.WriteLine("7-е задание: На какой процент вы хотите увеличить зарплату");
                         Console.WriteLine("8-е задание: Узнать зарплаты сотрудников в определённом отделе");
-                        Console.WriteLine("9-е задание: Натуральное число и его наименьший делитель отличный от 1");
+                        Console.WriteLine("9-е задание: Минимальная зарплата в каком-то отделе");
+                        Console.WriteLine("10-е задание: Максимальная зарплата в каком-то отделе");
 
-                        break;
+                    break;
                 }
 
                 int choice = Int32.Parse(Console.ReadLine());
@@ -145,13 +174,12 @@
                         break;
                     case 8:
                         DepartmentEmployee();
-                    
                         break;
                     case 9:
-                        test9();
+                        DepartamentSalaryMin();
                         break;
                     case 10:
-
+                    DepartamentSalaryMax();
                         break;
 
                 }
@@ -160,4 +188,4 @@
             }
 
         }
-}
+    }
