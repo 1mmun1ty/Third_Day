@@ -109,22 +109,40 @@
                 Console.WriteLine($"Отдел {department} не найден или не имеет сотрудников.");
             }
         }
-        void test9()
+        void DepartmentSalaryAvg()
+        {
+            Console.WriteLine("Введите номер отдела");
+            int departmentNumber = int.Parse(Console.ReadLine());
+            var filteredEmployees = employees.Where(e => e.Department == departmentNumber);
+
+            double departmentSalaryAvg = filteredEmployees.Average(e => e.Salary);
+
+            Console.WriteLine($"Среднее значение зарплат для отдела {departmentNumber}: {departmentSalaryAvg}");
+        }
+
+        void IndexSalary()
+        {
+            Console.WriteLine("Введите номер отдела");
+            int DepartmentOID = int.Parse(Console.ReadLine());
+            Console.WriteLine("На сколько вы хотите поднять зарплату сотрудники");
+            double SalaryPrecent = double.Parse(Console.ReadLine());
+            foreach (var emp in employees)
             {
-                Console.WriteLine("Введите число:");
-                double expected_salary = double.Parse(Console.ReadLine());
-
-                foreach (var emp in employees)
+                if (emp.Department == DepartmentOID)
                 {
-                    if (emp.Salary < expected_salary)
-                        Console.WriteLine($"Cотрудник под номером {emp._id} - {emp.Fio}, работающий в отделе " +
-                            $"{emp.Department} получает зарплату в размере" +
-                            $" {emp.Salary}");
-                }
+                    emp.Salary *= 1 + (SalaryPrecent / 100);
+                    Console.WriteLine($"Зарплата сотрудника {emp.Fio} равна {emp.Salary} рублей ");
+                }    
             }
+        }
 
 
-            while (true)
+
+
+
+
+
+        while (true)
             {
                 Console.WriteLine("Напишите 20, чтобы узнать информацию о всех заданиях");
 
@@ -181,6 +199,12 @@
                     case 10:
                     DepartamentSalaryMax();
                         break;
+                    case 11:
+                    DepartmentSalaryAvg();
+                        break;
+                case 12:
+                  IndexSalary();
+                    break;
 
                 }
                 Console.ReadKey();
