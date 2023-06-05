@@ -21,6 +21,11 @@ namespace Employee
             new Employee("Орехов Владислав Владиславович", 5, 17500),
             new Employee("Нагиев Дмитрий Вячеславович", 5, 100)
         };
+        List<Employee> deletedemployee = new List<Employee>()
+        {
+
+        };
+
         public void EmployeeBookMain()
         {
 
@@ -208,10 +213,10 @@ namespace Employee
                 Console.WriteLine("Введите ID сотрудника которого хотите удалить");
                 int index = int.Parse(Console.ReadLine());
                 index -= 1;
-                DeletedEmployee.Add(employees[index]);
-                foreach (var delemp in DeletedEmployee)
+                deletedemployee.Add(employees[index]);
+                foreach (var delemp in deletedemployee)
                 {
-                    Console.WriteLine($"Фио удаленного сотрудника {delemp.Fio}, департамент {delemp.Department}, Зарплата{delemp.Salary}");
+                    Console.WriteLine($"Фио удаленного сотрудника {delemp.Fio}, департамент {delemp.Department}, Зарплата {delemp.Salary},ID {delemp._id}");
                 }
                 index += 1;
                 foreach (var emp in employees)
@@ -235,14 +240,43 @@ namespace Employee
                     Console.WriteLine("Список сотрудников пуст.");
                 }
             }
+            void ChangeSalary()
+            {
+                Console.WriteLine("Введите ID сотрудника которому хотите поменять зарплату");
+                int indexchangesalary = int.Parse(Console.ReadLine());
+                foreach (var emp in employees)
+                {
+                    if (emp._id == indexchangesalary)
+                    {
+                        Console.WriteLine($"Введите новую зарплату сотруднику {emp.Fio}");
+                        double newsalary = Convert.ToDouble(Console.ReadLine());
+                        emp.Salary = newsalary;
+                        Console.WriteLine($"новая зарплата сотрудника {emp.Fio} равна  - {emp.Salary} ");
+                    }
+                }
+            }
+            void ChangeDepartment()
+            {
+                Console.WriteLine("Введите ID сотрудника которому хотите поменять отдел");
+                int indexchangedepartment = int.Parse(Console.ReadLine());
+                foreach (var emp in employees)
+                {
+                    if (emp._id == indexchangedepartment)
+                    {
+                        Console.WriteLine($"Введите новый отдел сотруднику {emp.Fio}");
+                        int newdepartment = int.Parse(Console.ReadLine());
+                        emp.Department = newdepartment;
+                        Console.WriteLine($"новый отдел сотрудника {emp.Fio} теперь - {emp.Department} ");
+                    }
+                }
+            }
 
 
 
 
 
 
-
-                while (true)
+            while (true)
                 {
                     Console.WriteLine("Напишите 20, чтобы узнать информацию о всех заданиях");
 
@@ -266,8 +300,11 @@ namespace Employee
                             Console.WriteLine("14-е задание: Зарплата ниже числа");
                             Console.WriteLine("15-е задание: Зарплата выше числа");
                             Console.WriteLine("16-e задание: Добавить сотрудника");
+                            Console.WriteLine("17-e задание: Удалить сотрудника");
+                            Console.WriteLine("18-e задание: Изменить зарплату сотрудника");
+                            Console.WriteLine("19-e задание: Изменить департамент сотрудника");
 
-                            break;
+                        break;
                     }
 
                     int choice = Int32.Parse(Console.ReadLine());
@@ -325,6 +362,12 @@ namespace Employee
                             break;
                     case 17:
                         DeleteEmployee();
+                        break;
+                    case 18: 
+                        ChangeSalary();
+                        break;
+                    case 19: 
+                        ChangeDepartment();
                         break;
 
 
